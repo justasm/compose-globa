@@ -46,7 +46,7 @@ fun PetRow(
                 style = MaterialTheme.typography.body1,
             )
             Text(
-                text = "${pet.type} ${pet.ageYearsFormatted}",
+                text = "${pet.type} · ${pet.ageYearsFormatted} · ${pet.gender}",
                 style = MaterialTheme.typography.body1,
             )
         }
@@ -73,7 +73,7 @@ private fun PetRowDarkPreview() {
     }
 }
 
-private val Pet.ageYearsFormatted: String
+val Pet.ageYearsFormatted: String
     get() {
         val start = ageYears.first
         val end = ageYears.last
