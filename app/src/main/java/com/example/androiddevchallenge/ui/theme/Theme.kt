@@ -15,40 +15,49 @@
  */
 package com.example.androiddevchallenge.ui.theme
 
+import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.Transition
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
-private val DarkColorPalette = darkColors(
-    primary = purple200,
-    primaryVariant = purple700,
-    secondary = teal200
-)
-
-private val LightColorPalette = lightColors(
-    primary = purple500,
-    primaryVariant = purple700,
-    secondary = teal200
-
-        /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
-)
+private object ColorPalette {
+    val primary = purple500 dark purple200
+    val primaryVariant = purple700
+    val secondary = teal200
+    val secondaryVariant = Color(0xFF018786) dark secondary
+    val background = Color.White dark Color(0xFF121212)
+    val surface = Color.White dark Color(0xFF121212)
+    val error = Color(0xFFB00020) dark Color(0xFFCF6679)
+    val onPrimary = Color.White dark Color.Black
+    val onSecondary = Color.Black dark Color.Black
+    val onBackground = Color.Black dark Color.White
+    val onSurface = Color.Black dark Color.White
+    val onError = Color.White dark Color.Black
+}
 
 @Composable
-fun MyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
+fun MyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+    val transition = updateTransition(darkTheme)
+
+    val colors = Colors(
+        primary = transition.animateColor(ColorPalette.primary).value,
+        primaryVariant = transition.animateColor(ColorPalette.primaryVariant).value,
+        secondary = transition.animateColor(ColorPalette.secondary).value,
+        secondaryVariant = transition.animateColor(ColorPalette.secondaryVariant).value,
+        background = transition.animateColor(ColorPalette.background).value,
+        surface = transition.animateColor(ColorPalette.surface).value,
+        error = transition.animateColor(ColorPalette.error).value,
+        onPrimary = transition.animateColor(ColorPalette.onPrimary).value,
+        onSecondary = transition.animateColor(ColorPalette.onSecondary).value,
+        onBackground = transition.animateColor(ColorPalette.onBackground).value,
+        onSurface = transition.animateColor(ColorPalette.onSurface).value,
+        onError = transition.animateColor(ColorPalette.onError).value,
+        isLight = !darkTheme,
+    )
 
     MaterialTheme(
         colors = colors,
@@ -57,3 +66,14 @@ fun MyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() (
         content = content
     )
 }
+
+private data class LightDarkColor(val light: Color, val dark: Color)
+
+private infix fun Color.dark(dark: Color) = LightDarkColor(light = this, dark = dark)
+
+@Composable
+private fun Transition<Boolean>.animateColor(color: LightDarkColor) =
+    animateColor { dark -> if (dark) color.dark else color.light }
+
+@Composable
+private fun Transition<Boolean>.animateColor(color: Color) = animateColor { color }
