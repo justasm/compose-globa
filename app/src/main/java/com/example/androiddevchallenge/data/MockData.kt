@@ -85,4 +85,4 @@ val pets = listOf(
         description = "Džordžas Holivudas <3",
         url = "https://tautmilesgloba.lt/gyvunai/dzordzas-sodyboj/",
     ),
-)
+).let { it + it + it }
