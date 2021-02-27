@@ -23,7 +23,7 @@
 
     <style name="Theme.AndroidDevChallenge.TranslucentSystemBars" parent="Theme.AndroidDevChallenge">
         <item name="android:navigationBarColor">
-            #B3FFFFFF
+            @android:color/transparent
         </item>
 
         <item name="android:statusBarColor">
