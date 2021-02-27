@@ -90,6 +90,27 @@ private fun InsetAwareTopAppBar(
     }
 }
 
+private fun PaddingValues(horizontal: Dp = 0.dp, vertical: Dp = 0.dp): PaddingValues =
+    PaddingValues(horizontal, vertical)
+
+private operator fun PaddingValues.plus(other: PaddingValues): PaddingValues {
+    return object : PaddingValues {
+        override fun calculateLeftPadding(layoutDirection: LayoutDirection) =
+            this@plus.calculateLeftPadding(layoutDirection) +
+                    other.calculateLeftPadding(layoutDirection)
+
+        override fun calculateTopPadding(): Dp =
+            this@plus.calculateTopPadding() + other.calculateTopPadding()
+
+        override fun calculateRightPadding(layoutDirection: LayoutDirection) =
+            this@plus.calculateRightPadding(layoutDirection) +
+                    other.calculateRightPadding(layoutDirection)
+
+        override fun calculateBottomPadding() =
+            this@plus.calculateBottomPadding() + other.calculateBottomPadding()
+    }
+}
+
 @Preview("Light Theme")
 @Composable
 private fun PetDetailScreenLightPreview() {
