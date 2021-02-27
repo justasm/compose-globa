@@ -21,10 +21,11 @@ fun PetList(
     pets: List<Pet>,
     onClick: (Pet) -> Unit,
     modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
     LazyColumn(
         modifier = modifier,
-        contentPadding = PaddingValues(horizontal = 0.dp, vertical = 8.dp)
+        contentPadding = contentPadding,
     ) {
         itemsIndexed(pets) { index, pet ->
             PetRow(
