@@ -26,8 +26,10 @@ import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.data.pets
 import com.example.androiddevchallenge.model.Pet
 import com.example.androiddevchallenge.ui.theme.MyTheme
+import dev.chrisbanes.accompanist.insets.LocalWindowInsets
 import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 import dev.chrisbanes.accompanist.insets.statusBarsPadding
+import dev.chrisbanes.accompanist.insets.toPaddingValues
 
 @Composable
 fun PetListScreen(
@@ -39,7 +41,7 @@ fun PetListScreen(
     Scaffold(
         topBar = {
             InsetAwareTopAppBar(
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 0.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp),
             ) {
                 Text(
                     text = "Tautmilės Globa",
@@ -59,8 +61,11 @@ fun PetListScreen(
                 }
             }
         }
-    ) {
-        PetList(pets, onClick = onPetClick)
+    ) { innerPadding ->
+        PetList(
+            pets = pets,
+            contentPadding = innerPadding + LocalWindowInsets.current.systemBars.toPaddingValues(top = false),
+            onClick = onPetClick)
     }
 }
 
