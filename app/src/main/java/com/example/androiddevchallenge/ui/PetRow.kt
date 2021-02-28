@@ -4,11 +4,16 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Female
+import androidx.compose.material.icons.filled.Male
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.data.pets
+import com.example.androiddevchallenge.model.Gender
 import com.example.androiddevchallenge.model.Pet
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
@@ -43,13 +49,27 @@ fun PetRow(
         Column {
             Text(
                 text = pet.name,
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.h6,
             )
-            Text(
-                text = "${pet.type} · ${pet.ageYearsFormatted} · ${pet.gender}",
-                style = MaterialTheme.typography.body1,
-            )
+            PetDetailSnippet(pet)
         }
+    }
+}
+
+@Composable
+private fun PetDetailSnippet(pet: Pet) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(2.dp),
+    ) {
+        Icon(when (pet.gender) {
+            Gender.Female -> Icons.Default.Female
+            Gender.Male -> Icons.Default.Male
+        }, contentDescription = null, modifier = Modifier.size(16.dp))
+        Text(
+            text = "${pet.type} · ${pet.ageYearsFormatted}",
+            style = MaterialTheme.typography.body1,
+        )
     }
 }
 
@@ -58,7 +78,7 @@ fun PetRow(
 private fun PetRowLightPreview() {
     MyTheme {
         Surface(color = MaterialTheme.colors.background) {
-            PetRow(pets[0])
+            PetRow(pets[0], Modifier.fillMaxWidth())
         }
     }
 }
@@ -68,7 +88,7 @@ private fun PetRowLightPreview() {
 private fun PetRowDarkPreview() {
     MyTheme(darkTheme = true) {
         Surface(color = MaterialTheme.colors.background) {
-            PetRow(pets[0])
+            PetRow(pets[0], Modifier.fillMaxWidth())
         }
     }
 }
@@ -78,8 +98,9 @@ val Pet.ageYearsFormatted: String
         val start = ageYears.first
         val end = ageYears.last
         return if (start == end) {
-            "$start years"
+            "$start year${if (start == 1) "" else "s"}"
         } else {
-            "$start-$end years"
+            // u2013 - en dash
+            "$start\u2013$end years"
         }
     }
