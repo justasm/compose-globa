@@ -16,9 +16,9 @@
 package com.example.androiddevchallenge.data
 
 import com.example.androiddevchallenge.R
-import com.example.androiddevchallenge.model.Sex
 import com.example.androiddevchallenge.model.Pet
 import com.example.androiddevchallenge.model.PetType
+import com.example.androiddevchallenge.model.Sex
 
 val pets = listOf(
     Pet(

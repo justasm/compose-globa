@@ -40,8 +40,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.data.pets
-import com.example.androiddevchallenge.model.Sex
 import com.example.androiddevchallenge.model.Pet
+import com.example.androiddevchallenge.model.Sex
 import com.example.androiddevchallenge.model.formatAgeYearsLabel
 import com.example.androiddevchallenge.model.formatAgeYearsRange
 import com.example.androiddevchallenge.ui.theme.MyTheme
