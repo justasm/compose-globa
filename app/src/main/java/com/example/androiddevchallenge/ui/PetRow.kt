@@ -62,10 +62,13 @@ private fun PetDetailSnippet(pet: Pet) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(2.dp),
     ) {
-        Icon(when (pet.gender) {
-            Gender.Female -> Icons.Default.Female
-            Gender.Male -> Icons.Default.Male
-        }, contentDescription = null, modifier = Modifier.size(16.dp))
+        Icon(
+            when (pet.gender) {
+                Gender.Female -> Icons.Default.Female
+                Gender.Male -> Icons.Default.Male
+            },
+            contentDescription = null, modifier = Modifier.size(16.dp)
+        )
         Text(
             text = "${pet.type} · ${pet.ageYearsFormatted}",
             style = MaterialTheme.typography.body1,
