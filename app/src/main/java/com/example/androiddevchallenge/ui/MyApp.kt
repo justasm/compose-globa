@@ -38,6 +38,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.androiddevchallenge.data.pets
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import dev.chrisbanes.accompanist.insets.navigationBarsHeight
+import dev.chrisbanes.accompanist.insets.statusBarsHeight
 
 @Composable
 fun MyApp(systemInDarkTheme: Boolean = isSystemInDarkTheme()) {
@@ -67,13 +68,19 @@ fun MyApp(systemInDarkTheme: Boolean = isSystemInDarkTheme()) {
             }
         }
 
-        // Navigation bar protection.
-        // Dynamic instead of android:navigationBarColor in the theme to support dynamic light/dark
-        // theme switching.
+        // System bar protection.
+        // Dynamic instead of android:statusBarColor / android:navigationBarColor in the theme to
+        // support dynamic light/dark theme switching.
         // On Q and above, the system automatically enforces contrast.
         // https://medium.com/androiddevelopers/gesture-navigation-going-edge-to-edge-812f62e4e83e
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             Box(Modifier.fillMaxSize()) {
+                Spacer(
+                    Modifier
+                        .background(MaterialTheme.colors.onBackground.copy(alpha = 0.3f))
+                        .statusBarsHeight()
+                        .fillMaxWidth()
+                )
                 Spacer(
                     Modifier
                         .background(MaterialTheme.colors.onBackground.copy(alpha = 0.3f))
