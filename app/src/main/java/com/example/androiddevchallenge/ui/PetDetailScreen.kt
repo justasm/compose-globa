@@ -111,7 +111,7 @@ fun PetDetailScreen(pet: Pet, onBackClick: () -> Unit) {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     PetDetailCard(
-                        value = pet.gender.toString(),
+                        value = pet.sex.toString(),
                         description = "Sex",
                         modifier = Modifier.weight(1f)
                     )

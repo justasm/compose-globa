@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -41,7 +40,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.data.pets
-import com.example.androiddevchallenge.model.Gender
+import com.example.androiddevchallenge.model.Sex
 import com.example.androiddevchallenge.model.Pet
 import com.example.androiddevchallenge.model.formatAgeYearsLabel
 import com.example.androiddevchallenge.model.formatAgeYearsRange
@@ -86,9 +85,9 @@ private fun PetDetailSnippet(pet: Pet) {
         horizontalArrangement = Arrangement.spacedBy(2.dp),
     ) {
         Icon(
-            when (pet.gender) {
-                Gender.Female -> Icons.Default.Female
-                Gender.Male -> Icons.Default.Male
+            when (pet.sex) {
+                Sex.Female -> Icons.Default.Female
+                Sex.Male -> Icons.Default.Male
             },
             contentDescription = null, modifier = Modifier.size(16.dp)
         )

@@ -21,7 +21,7 @@ data class Pet(
     val name: String,
     @DrawableRes val resource: Int,
     val type: PetType,
-    val gender: Gender,
+    val sex: Sex,
     val ageYears: IntRange,
     val description: String,
     val url: String,
@@ -32,7 +32,7 @@ enum class PetType {
     Dog,
 }
 
-enum class Gender {
+enum class Sex {
     Female,
     Male,
 }

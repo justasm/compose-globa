@@ -16,7 +16,7 @@
 package com.example.androiddevchallenge.data
 
 import com.example.androiddevchallenge.R
-import com.example.androiddevchallenge.model.Gender
+import com.example.androiddevchallenge.model.Sex
 import com.example.androiddevchallenge.model.Pet
 import com.example.androiddevchallenge.model.PetType
 
@@ -25,7 +25,7 @@ val pets = listOf(
         name = "Mitka",
         resource = R.drawable.mitka,
         type = PetType.Cat,
-        gender = Gender.Male,
+        sex = Sex.Male,
         ageYears = 8..8,
         description = "Labai draugiškas katinas rainys, mirė šeimininkas. 11 m. Micka.",
         url = "https://tautmilesgloba.lt/gyvunai/mitka/",
@@ -34,7 +34,7 @@ val pets = listOf(
         name = "Fredis",
         resource = R.drawable.fredis,
         type = PetType.Dog,
-        gender = Gender.Male,
+        sex = Sex.Male,
         ageYears = 1..3,
         description = """
             ❤️ Ieškome namų Šalčininkų Fredžiui ❤️
@@ -50,7 +50,7 @@ val pets = listOf(
         name = "Geraldas",
         resource = R.drawable.geraldas,
         type = PetType.Dog,
-        gender = Gender.Male,
+        sex = Sex.Male,
         ageYears = 1..3,
         description = """
             RASTAS lapkričio 22 d. Kairėnuose, be čipo, laukia savo šeimininkų prieglaudoj.
@@ -62,7 +62,7 @@ val pets = listOf(
         name = "Laila",
         resource = R.drawable.laila,
         type = PetType.Dog,
-        gender = Gender.Female,
+        sex = Sex.Female,
         ageYears = 1..3,
         description = """
             ❤️ Ieškome namų Lailaaaaai ❤️
@@ -81,7 +81,7 @@ val pets = listOf(
         name = "Lentvarietis",
         resource = R.drawable.lentvarietis,
         type = PetType.Dog,
-        gender = Gender.Male,
+        sex = Sex.Male,
         ageYears = 4..8,
         description = """
             Lentvarietis vis dar laukia savo nuolatinių namų, prieglaudėleje. 🏡
@@ -95,7 +95,7 @@ val pets = listOf(
         name = "Džordžas",
         resource = R.drawable.dzordzas,
         type = PetType.Dog,
-        gender = Gender.Male,
+        sex = Sex.Male,
         ageYears = 1..3,
         description = "Džordžas Holivudas <3",
         url = "https://tautmilesgloba.lt/gyvunai/dzordzas-sodyboj/",
