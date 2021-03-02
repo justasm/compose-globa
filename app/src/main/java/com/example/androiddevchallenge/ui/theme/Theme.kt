@@ -25,16 +25,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private object ColorPalette {
-    val primary = purple500 dark purple200
-    val primaryVariant = purple700
-    val secondary = teal200
-    val secondaryVariant = Color(0xFF018786) dark secondary
-    val background = Color.White dark Color(0xFF121212)
-    val surface = Color.White dark Color(0xFF121212)
+    val primary = green dark purple200
+    val primaryVariant = Color(0xFF4B8E78) dark purple700
+    val secondary = red
+    val secondaryVariant = secondary
+    val background = Color.White dark Color.Black
+    val surface = beige dark grey900
     val error = Color(0xFFB00020) dark Color(0xFFCF6679)
     val onPrimary = Color.White dark Color.Black
     val onSecondary = Color.Black dark Color.Black
-    val onBackground = Color.Black dark Color.White
+    val onBackground = brown dark Color.White
     val onSurface = Color.Black dark Color.White
     val onError = Color.White dark Color.Black
 }
