@@ -65,7 +65,8 @@ fun PetListScreen(
         PetList(
             pets = pets,
             contentPadding = innerPadding + LocalWindowInsets.current.systemBars.toPaddingValues(top = false),
-            onClick = onPetClick)
+            onClick = onPetClick
+        )
     }
 }
 
