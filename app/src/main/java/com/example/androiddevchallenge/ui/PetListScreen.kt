@@ -15,35 +15,38 @@
  */
 package com.example.androiddevchallenge.ui
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LightMode
-import androidx.compose.material.primarySurface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.data.pets
 import com.example.androiddevchallenge.model.Pet
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import dev.chrisbanes.accompanist.insets.LocalWindowInsets
-import dev.chrisbanes.accompanist.insets.navigationBarsPadding
-import dev.chrisbanes.accompanist.insets.statusBarsPadding
+import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 import dev.chrisbanes.accompanist.insets.toPaddingValues
 
 @Composable
@@ -53,80 +56,78 @@ fun PetListScreen(
     inDarkTheme: Boolean,
     onToggleDarkThemeClick: () -> Unit,
 ) {
-    Scaffold(
-        topBar = {
-            InsetAwareTopAppBar(
-                contentPadding = PaddingValues(horizontal = 16.dp),
-            ) {
-                Text(
-                    text = "Tautmilės Globa",
-                    style = MaterialTheme.typography.h6.copy(fontWeight = FontWeight.Bold),
+    Surface(color = MaterialTheme.colors.background) {
+        LazyColumn(
+            contentPadding = PaddingValues(bottom = 16.dp) +
+                    LocalWindowInsets.current.systemBars.toPaddingValues(),
+        ) {
+            item {
+                PetListHeader(inDarkTheme, onToggleDarkThemeClick)
+            }
+
+            items(pets.chunked(2)) { pets ->
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = Modifier
-                        .align(Alignment.CenterVertically)
-                        .weight(1f)
-                )
-                IconButton(
-                    onClick = onToggleDarkThemeClick,
-                    modifier = Modifier.align(Alignment.CenterVertically)
+                        .padding(horizontal = 8.dp)
+                        .padding(top = 8.dp)
                 ) {
-                    Icon(
-                        imageVector = if (inDarkTheme) Icons.Default.LightMode else Icons.Default.DarkMode,
-                        contentDescription = "Toggle dark mode"
-                    )
+                    pets.forEach { pet ->
+                        PetCard(
+                            pet,
+                            modifier = Modifier
+                                .weight(1f)
+                                .clickable { onPetClick(pet) }
+                        )
+                    }
                 }
             }
         }
-    ) { innerPadding ->
-        PetList(
-            pets = pets,
-            contentPadding = innerPadding + LocalWindowInsets.current.systemBars.toPaddingValues(top = false),
-            onClick = onPetClick
-        )
     }
 }
 
 @Composable
-private fun InsetAwareTopAppBar(
-    modifier: Modifier = Modifier,
-    backgroundColor: Color = MaterialTheme.colors.primarySurface,
-    contentColor: Color = contentColorFor(backgroundColor),
-    contentPadding: PaddingValues,
-    elevation: Dp = 4.dp,
-    content: @Composable RowScope.() -> Unit,
+private fun PetListHeader(
+    inDarkTheme: Boolean,
+    onToggleDarkThemeClick: () -> Unit,
 ) {
-    Surface(
-        color = backgroundColor,
-        elevation = elevation,
-        modifier = modifier
+    Row(
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 16.dp)
     ) {
-        TopAppBar(
-            backgroundColor = Color.Transparent,
-            contentColor = contentColor,
-            elevation = 0.dp,
-            contentPadding = contentPadding,
+        Image(
+            painter = painterResource(R.drawable.logo),
+            contentDescription = null,
+            colorFilter = ColorFilter.tint(MaterialTheme.colors.onBackground),
             modifier = Modifier
-                .statusBarsPadding()
-                .navigationBarsPadding(bottom = false),
-            content = content,
+                .width(256.dp)
+                .padding(top = 32.dp)
         )
+        Spacer(Modifier.weight(1f))
+        IconButton(
+            onClick = onToggleDarkThemeClick,
+            modifier = Modifier.align(Alignment.Top)
+        ) {
+            Icon(
+                imageVector = if (inDarkTheme) Icons.Default.LightMode else Icons.Default.DarkMode,
+                contentDescription = "Toggle dark mode"
+            )
+        }
     }
 }
-
-private fun PaddingValues(horizontal: Dp = 0.dp, vertical: Dp = 0.dp): PaddingValues =
-    PaddingValues(horizontal, vertical)
 
 private operator fun PaddingValues.plus(other: PaddingValues): PaddingValues {
     return object : PaddingValues {
         override fun calculateLeftPadding(layoutDirection: LayoutDirection) =
             this@plus.calculateLeftPadding(layoutDirection) +
-                other.calculateLeftPadding(layoutDirection)
+                    other.calculateLeftPadding(layoutDirection)
 
         override fun calculateTopPadding(): Dp =
             this@plus.calculateTopPadding() + other.calculateTopPadding()
 
         override fun calculateRightPadding(layoutDirection: LayoutDirection) =
             this@plus.calculateRightPadding(layoutDirection) +
-                other.calculateRightPadding(layoutDirection)
+                    other.calculateRightPadding(layoutDirection)
 
         override fun calculateBottomPadding() =
             this@plus.calculateBottomPadding() + other.calculateBottomPadding()
@@ -136,25 +137,29 @@ private operator fun PaddingValues.plus(other: PaddingValues): PaddingValues {
 @Preview("Light Theme")
 @Composable
 private fun PetDetailScreenLightPreview() {
-    MyTheme {
-        PetListScreen(
-            pets = pets,
-            onPetClick = {},
-            inDarkTheme = false,
-            onToggleDarkThemeClick = {},
-        )
+    ProvideWindowInsets {
+        MyTheme {
+            PetListScreen(
+                pets = pets,
+                onPetClick = {},
+                inDarkTheme = false,
+                onToggleDarkThemeClick = {},
+            )
+        }
     }
 }
 
 @Preview("Dark Theme")
 @Composable
 private fun PetDetailScreenDarkPreview() {
-    MyTheme(darkTheme = true) {
-        PetListScreen(
-            pets = pets,
-            onPetClick = {},
-            inDarkTheme = true,
-            onToggleDarkThemeClick = {},
-        )
+    ProvideWindowInsets {
+        MyTheme(darkTheme = true) {
+            PetListScreen(
+                pets = pets,
+                onPetClick = {},
+                inDarkTheme = true,
+                onToggleDarkThemeClick = {},
+            )
+        }
     }
 }
