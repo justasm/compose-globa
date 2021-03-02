@@ -48,6 +48,7 @@ fun PetDetailCard(
     val iconSize = with(LocalDensity.current) { 64.dp.toPx() }.let { Size(it, it) }
     Surface(
         color = color,
+        shape = MaterialTheme.shapes.small,
         modifier = modifier,
     ) {
         Column(
