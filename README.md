@@ -11,6 +11,7 @@ The app is a playground for several experiments with Jetpack Compose.
 - [Dynamic animation between light & dark themes.][theme-animation]
 - [Vertical grid of cards.][pet-grid]
 - [Custom graphics.][pet-detail-card]
+- Edge-to-edge UI with padding to accommodate system bars.
 
 
 ## :camera_flash: Screenshots
@@ -34,6 +35,6 @@ limitations under the License.
 ```
 
 [tautmiles]: https://tautmilesgloba.lt
-[theme-animation]: app/src/main/java/com/example/androiddevchallenge/ui/theme/Theme.kt
-[pet-grid]: app/src/main/java/com/example/androiddevchallenge/ui/PetListScreen.kt
-[pet-detail-card]: app/src/main/java/com/example/androiddevchallenge/ui/PetDetailCard.kt
+[theme-animation]: app/src/main/java/com/example/androiddevchallenge/ui/theme/Theme.kt#L44
+[pet-grid]: app/src/main/java/com/example/androiddevchallenge/ui/PetListScreen.kt#L60
+[pet-detail-card]: app/src/main/java/com/example/androiddevchallenge/ui/PetDetailCard.kt#L58
