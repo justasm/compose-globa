@@ -36,3 +36,20 @@ enum class Gender {
     Female,
     Male,
 }
+
+fun Pet.formatAgeYearsRange(): String {
+    val start = ageYears.first
+    val end = ageYears.last
+    return if (start == end) {
+        "$start"
+    } else {
+        // u2013 - en dash
+        "$start\u2013$end"
+    }
+}
+
+fun Pet.formatAgeYearsLabel(): String {
+    val start = ageYears.first
+    val end = ageYears.last
+    return if (start == 1 && end == 1) "year" else "years"
+}
