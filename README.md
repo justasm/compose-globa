@@ -1,6 +1,6 @@
 # Tautmilės Globa
 
-![Workflow result](https://github.com/justasm/globa-compose/workflows/Check/badge.svg)
+![Workflow result](https://github.com/justasm/compose-globa/workflows/Check/badge.svg)
 
 ## :scroll: Description
 A pet adoption sample app built to demonstrate Jetpack Compose UI. The logo, theme and pet data
